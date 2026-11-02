@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>დავით ბერიძე — Lead UI/UX დიზაინერი & Frontend არქიტექტორი</title>
+  <meta name="description" content="დავით ბერიძის პროფესიონალური პორტფოლიო. ექსკლუზიური ციფრული გამოცდილება, UI/UX დიზაინი, თანამედროვე Frontend არქიტექტურა და ინოვაციური ვებ-სისტემები.">
+  
+  <!-- Google Fonts: Noto Sans Georgian & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- External Master Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Embedded Component Styles -->
+  <style>
+    /* Hero Section Specific Styles */
+    .hero-section {
+      position: relative;
+      padding: 70px 0 90px 0;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-greeting {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .hero-desc {
+      font-size: 1.18rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
+      max-width: 580px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Hero Visual Card with Glowing Emerald Persona */
+    .hero-visual-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-glow-backdrop {
+      position: absolute;
+      width: 105%;
+      height: 105%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(13, 148, 136, 0.12) 40%, transparent 70%);
+      filter: blur(40px);
+      z-index: 1;
+      border-radius: 50%;
+    }
+
+    .hero-photo-card {
+      position: relative;
+      z-index: 2;
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(20, 30, 42, 0.8) 0%, rgba(10, 15, 22, 0.95) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 35px rgba(16, 185, 129, 0.18);
+      padding: 16px;
+      backdrop-filter: blur(16px);
+      max-width: 440px;
+      width: 100%;
+      transition: transform var(--transition-normal);
+    }
+
+    .hero-photo-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(16, 185, 129, 0.45);
+      box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.8), 0 0 50px rgba(16, 185, 129, 0.3);
+    }
+
+    .hero-photo-inner {
+      border-radius: 20px;
+      overflow: hidden;
+      background: #090c10;
+      position: relative;
+      aspect-ratio: 1 / 1.15;
+    }
+
+    .hero-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-photo-card:hover .hero-photo-img {
+      transform: scale(1.03);
+    }
+
+    /* Floating Badges on Hero Card */
+    .floating-badge {
+      position: absolute;
+      z-index: 3;
+      background: rgba(15, 23, 35, 0.85);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      backdrop-filter: blur(12px);
+      padding: 12px 18px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: float-badge 4s infinite ease-in-out;
+    }
+
+    .badge-top-right {
+      top: 25px;
+      right: -25px;
+      animation-delay: 0s;
+    }
+
+    .badge-bottom-left {
+      bottom: 25px;
+      left: -25px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float-badge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .floating-badge-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .floating-badge-text strong {
+      display: block;
+      color: var(--text-primary);
+      font-size: 0.92rem;
+      line-height: 1.2;
+    }
+
+    .floating-badge-text span {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    /* Featured Projects Grid on Index */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .project-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-normal);
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--emerald-border);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 30px rgba(16, 185, 129, 0.15);
+    }
+
+    .project-thumb {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: #0d131a;
+    }
+
+    .project-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-thumb img {
+      transform: scale(1.06);
+    }
+
+    .project-tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(10, 15, 20, 0.85);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--emerald-light);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      backdrop-filter: blur(8px);
+    }
+
+    .project-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .project-excerpt {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    /* Philosophy / Value Pillars */
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .philosophy-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      transition: all var(--transition-normal);
+      position: relative;
+    }
+
+    .philosophy-card:hover {
+      border-color: var(--emerald-border);
+      transform: translateY(-6px);
+      background: var(--bg-surface-elevated);
+    }
+
+    .philosophy-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(13, 148, 136, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--emerald-light);
+      margin-bottom: 24px;
+    }
+
+    .philosophy-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+    }
+
+    .philosophy-card p {
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    /* Executive Quote Aside */
+    .executive-aside {
+      background: linear-gradient(135deg, rgba(19, 27, 36, 0.9) 0%, rgba(13, 20, 28, 0.95) 100%);
+      border: 1px solid var(--emerald-border);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      position: relative;
+      margin: 80px 0;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+    }
+
+    .quote-content {
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+
+    .quote-mark {
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--emerald-teal);
+      opacity: 0.4;
+      font-family: Georgia, serif;
+      margin-bottom: -15px;
+    }
+
+    .quote-text {
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .quote-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .quote-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid var(--emerald-light);
+      overflow: hidden;
+    }
+
+    .quote-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .quote-author-info {
+      text-align: left;
+    }
+
+    .quote-author-name {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 1rem;
+    }
+
+    .quote-author-role {
+      font-size: 0.82rem;
+      color: var(--emerald-light);
+    }
+
+    /* CTA Section */
+    .cta-banner {
+      background: radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, rgba(13, 20, 28, 0.8) 100%), var(--bg-surface);
+      border: 1px solid var(--emerald-border);
+      border-radius: var(--radius-lg);
+      padding: clamp(36px, 6vw, 64px) clamp(20px, 5vw, 40px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(1.6rem, 3.8vw, 2.3rem);
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 1200px) {
+      .hero-grid {
+        gap: 40px;
+      }
+      .hero-title {
+        font-size: clamp(2.4rem, 4vw, 3.1rem);
+      }
+      .badge-top-right {
+        right: -10px;
+      }
+      .badge-bottom-left {
+        left: -10px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-section {
+        padding: 50px 0 70px 0;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .featured-grid, .philosophy-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      .badge-top-right {
+        right: -8px;
+      }
+      .badge-bottom-left {
+        left: -8px;
+      }
+      .executive-aside {
+        padding: 36px 28px;
+        margin: 60px 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 36px 0 56px 0;
+      }
+      .hero-title {
+        font-size: clamp(1.95rem, 6.5vw, 2.45rem);
+        overflow-wrap: break-word;
+      }
+      .hero-desc {
+        font-size: 1.02rem;
+        margin-bottom: 28px;
+      }
+      .featured-grid, .philosophy-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .philosophy-card {
+        padding: 28px 22px;
+      }
+      .executive-aside {
+        padding: 28px 20px;
+        margin: 48px 0;
+      }
+      .quote-text {
+        font-size: 1.06rem;
+      }
+      .floating-badge {
+        padding: 8px 12px;
+        gap: 8px;
+      }
+      .floating-badge-icon {
+        width: 30px;
+        height: 30px;
+        font-size: 0.95rem;
+      }
+      .floating-badge-text strong {
+        font-size: 0.82rem;
+      }
+      .floating-badge-text span {
+        font-size: 0.7rem;
+      }
+      .badge-top-right {
+        top: 12px;
+        right: 8px;
+      }
+      .badge-bottom-left {
+        bottom: 12px;
+        left: 8px;
+      }
+      .hero-photo-card {
+        max-width: 340px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .hero-actions .btn {
+        width: 100%;
+      }
+      .cta-banner .btn {
+        width: 100%;
+      }
+      .floating-badge {
+        display: none;
+      }
+      .hero-photo-card {
+        max-width: 300px;
+        padding: 12px;
+      }
+      .quote-author {
+        flex-direction: column;
+        text-align: center;
+      }
+      .quote-author-info {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION (<header>, <nav>)
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="site-logo" aria-label="დავით ბერიძე — მთავარი">
+        <div class="logo-symbol">DB</div>
+        <div class="logo-text">
+          <span class="logo-name">დავით ბერიძე</span>
+          <span class="logo-sub">Design & Code</span>
+        </div>
+      </a>
+
+      <!-- Main Navigation Menu (Desktop Bar + Tablet/Phone Slide Drawer) -->
+      <nav class="main-nav" id="main-navigation" aria-label="მთავარი ნავიგაცია">
+        <div class="nav-drawer-header">
+          <span class="nav-drawer-label">მენიუ</span>
+          <span class="nav-drawer-status"><span class="badge-dot"></span> Online</span>
+        </div>
+
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link active" aria-current="page">მთავარი</a></li>
+          <li><a href="about.html" class="nav-link">ჩემ შესახებ</a></li>
+          <li><a href="projects.html" class="nav-link">პროექტები</a></li>
+          <li><a href="contact.html" class="nav-link">კონტაქტი</a></li>
+        </ul>
+
+        <div class="nav-drawer-footer">
+          <a href="contact.html" class="btn btn-primary">დამიკავშირდით →</a>
+          <div class="nav-drawer-contact">
+            <span>თბილისი, საქართველო / Remote</span>
+            <a href="mailto:david.beridze.design@gmail.com">david.beridze.design@gmail.com</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <a href="contact.html" class="btn btn-primary">დამიკავშირდით</a>
+        <button class="mobile-nav-toggle" type="button" aria-label="მენიუს გახსნა" aria-expanded="false" aria-controls="main-navigation">
+          <span class="hamburger-box" aria-hidden="true">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <div class="nav-backdrop" aria-hidden="true"></div>
+
+  <!-- ==========================================================================
+       MAIN CONTENT (<main>)
+       ========================================================================== -->
+  <main>
+    <!-- HERO SECTION (<section>) -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Hero Text Column -->
+          <div class="hero-content">
+            <div class="hero-greeting">
+              <span class="badge">
+                <span class="badge-dot"></span>
+                ღია ვარ ახალი თანამშრომლობისთვის
+              </span>
+            </div>
+
+            <h1 class="hero-title">
+              შევქმნათ <span class="text-gradient">ინოვაციური</span> ციფრული პროდუქტები
+            </h1>
+
+            <p class="hero-desc">
+              გამარჯობა, მე ვარ <strong>დავით ბერიძე</strong> — გამოცდილი Lead UI/UX დიზაინერი და Frontend არქიტექტორი. 
+              ვქმნი უმაღლესი დონის, ვიზუალურად შთამბეჭდავ და ტექნიკურად გამართულ ვებ-სისტემებს, რომლებიც ზრდიან ბიზნესის ღირებულებას.
+            </p>
+
+            <div class="hero-actions">
+              <a href="projects.html" class="btn btn-primary">
+                <span>პროექტების ნახვა</span>
+                <span>→</span>
+              </a>
+              <a href="about.html" class="btn btn-outline">
+                <span>გაიგეთ მეტი ჩემ შესახებ</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Profile Image Column (User Attached Photo) -->
+          <div class="hero-visual-wrapper">
+            <div class="hero-glow-backdrop"></div>
+
+            <div class="hero-photo-card">
+              <div class="hero-photo-inner">
+                <img src="assets/images/profile.png" alt="დავით ბერიძე — Lead UI/UX დიზაინერი & Frontend არქიტექტორი" class="hero-photo-img" loading="eager">
+              </div>
+
+              <!-- Floating Micro-Badges -->
+              <div class="floating-badge badge-top-right">
+                <div class="floating-badge-icon">✦</div>
+                <div class="floating-badge-text">
+                  <strong>10+ წელი</strong>
+                  <span>პროფესიული გამოცდილება</span>
+                </div>
+              </div>
+
+              <div class="floating-badge badge-bottom-left">
+                <div class="floating-badge-icon">★</div>
+                <div class="floating-badge-text">
+                  <strong>99% კმაყოფილება</strong>
+                  <span>საერთაშორისო პარტნიორები</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Metric Counter Strip (<section>) -->
+        <section class="metrics-strip" aria-label="ძირითადი მიღწევები">
+          <div class="metric-item">
+            <div class="metric-number text-gradient-emerald">10+</div>
+            <div class="metric-label">წლიანი გამოცდილება ინდუსტრიაში</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-number text-gradient-emerald">45+</div>
+            <div class="metric-label">წარმატებით დანერგილი პროექტი</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-number text-gradient-emerald">12</div>
+            <div class="metric-label">საერთაშორისო დიზაინ ჯილდო</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-number text-gradient-emerald">100%</div>
+            <div class="metric-label">სუფთა კოდი & თანამედროვე სტეკი</div>
+          </div>
+        </section>
+
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS PREVIEW (<section>) -->
+    <section class="section-padding" style="background: var(--bg-secondary);">
+      <div class="container">
+        <header class="section-header">
+          <span class="badge">რჩეული ნამუშევრები</span>
+          <h2 class="section-title">ბოლოდროინდელი პროექტები</h2>
+          <p class="section-subtitle">გაეცანით ჩემს მიერ შექმნილ უახლეს ციფრულ გადაწყვეტებს, სადაც ელეგანტური UI/UX ხვდება უზადო Frontend კოდს.</p>
+        </header>
+
+        <div class="featured-grid">
+          
+          <!-- Project 1 (<article>) -->
+          <article class="project-card">
+            <div class="project-thumb">
+              <span class="project-tag">FinTech & ანალიტიკა</span>
+              <img src="assets/images/project1.jpg" alt="Quantum Analytics პლატფორმა" loading="lazy">
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Quantum Analytics პლატფორმა</h3>
+              <p class="project-excerpt">ინოვაციური ფინანსური ანალიტიკის პლატფორმა საინვესტიციო მენეჯმენტისთვის რეალურ დროში მონაცემთა ვიზუალიზაციით.</p>
+              <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">React</span>
+                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">D3.js</span>
+                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">UI/UX</span>
+              </div>
+              <button onclick="openProjectModal('fintech')" class="btn btn-outline" style="width: 100%;">დეტალების ნახვა</button>
+            </div>
+          </article>
+
+          <!-- Project 2 (<article>) -->
+          <article class="project-card">
+            <div class="project-thumb">
+              <span class="project-tag">Luxury ელ-კომერცია</span>
+              <img src="assets/images/project2.jpg" alt="Aura Atelier ექსკლუზიური მოდის ელ-მაღაზია" loading="lazy">
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Aura Atelier ონლაინ ბუტიკი</h3>
+              <p class="project-excerpt">ექსკლუზიური მოდის ელექტრონული მაღაზია მინიმალისტური ესთეტიკით, ზურმუხტისფერი აქცენტებით და მაღალი კონვერსიით.</p>
+              <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">Next.js</span>
+                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">Design System</span>
+                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">CSS3 Micro</span>
+              </div>
+              <button onclick="openProjectModal('ecommerce')" class="btn btn-outline" style="width: 100%;">დეტალების ნახვა</button>
+            </div>
+          </article>
+
+          <!-- Project 3 (<article>) -->
+          <article class="project-card">
+            <div class="project-thumb">
+              <span class="project-tag">AI & SaaS სისტემები</span>
+              <img src="assets/images/project3.jpg" alt="Synthesis AI დიზაინ-სისტემების სტუდია" loading="lazy">
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Synthesis AI დიზაინ სტუდია</h3>
+              <p class="project-excerpt">ხელოვნური ინტელექტით მართვადი დიზაინ-სისტემების ორკესტრაციის პლატფორმა გუნდური პროდუქტიულობისთვის.</p>
+              <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">SaaS UI</span>
+                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">Vue 3</span>
+                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">Canvas API</span>
+              </div>
+              <button onclick="openProjectModal('saas')" class="btn btn-outline" style="width: 100%;">დეტალების ნახვა</button>
+            </div>
+          </article>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+          <a href="projects.html" class="btn btn-primary">ყველა პროექტის დათვალიერება →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN PHILOSOPHY SECTION (<section>) -->
+    <section class="section-padding">
+      <div class="container">
+        <header class="section-header">
+          <span class="badge">მიდგომა და ფილოსოფია</span>
+          <h2 class="section-title">რატომ ირჩევენ ჩემთან მუშაობას?</h2>
+          <p class="section-subtitle">დიზაინი არ არის მხოლოდ ვიზუალი — ეს არის სტრატეგიული ინსტრუმენტი თქვენი მიზნების მისაღწევად.</p>
+        </header>
+
+        <div class="philosophy-grid">
+          
+          <article class="philosophy-card">
+            <div class="philosophy-icon">🎨</div>
+            <h3>ესთეტიკისა და ფუნქციონალის ბალანსი</h3>
+            <p>თითოეული პიქსელი ემსახურება მომხმარებლის გამოცდილებას. დიზაინი იზიდავს ერთი შეხედვით, ხოლო ლოგიკა ხდის მას ინტუიციურს.</p>
+          </article>
+
+          <article class="philosophy-card">
+            <div class="philosophy-icon">⚡</div>
+            <h3>უმაღლესი სისწრაფე და ოპტიმიზაცია</h3>
+            <p>სუფთა, სტანდარტებთან შესაბამისი HTML5/CSS კოდი, მინიმალური ჩატვირთვის დრო და 99+ ქულა Google Lighthouse-ში.</p>
+          </article>
+
+          <article class="philosophy-card">
+            <div class="philosophy-icon">💎</div>
+            <h3>მასშტაბირებადი დიზაინ-სისტემები</h3>
+            <p>მოდულური არქიტექტურა, კომპონენტური ბაზა და დოკუმენტირებული წესები, რაც პროდუქტის განვითარებას ხდის მარტივსა და ეკონომიურს.</p>
+          </article>
+
+        </div>
+
+        <!-- EXECUTIVE ASIDE QUOTE (<aside>) -->
+        <aside class="executive-aside" aria-label="პროფესიული კრედო">
+          <div class="quote-content">
+            <div class="quote-mark">“</div>
+            <blockquote class="quote-text">
+              „ჭეშმარიტი ფუფუნება ციფრულ სამყაროში არის სიმარტივისა და დახვეწილობის ჰარმონია. როდესაც კოდი და ვიზუალი სრულყოფილად ერწყმის ერთმანეთს, იბადება პროდუქტი, რომელიც დროს უძლებს.“
+            </blockquote>
+            <div class="quote-author">
+              <div class="quote-avatar">
+                <img src="assets/images/profile.png" alt="დავით ბერიძე">
+              </div>
+              <div class="quote-author-info">
+                <div class="quote-author-name">დავით ბერიძე</div>
+                <div class="quote-author-role">Lead UI/UX დიზაინერი & Frontend არქიტექტორი</div>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- CTA SECTION (<section>) -->
+        <section class="cta-banner" aria-label="თანამშრომლობის შეთავაზება">
+          <h2>გაქვთ საინტერესო პროექტი ჩაფიქრებული?</h2>
+          <p style="color: var(--text-secondary); max-width: 580px; margin: 0 auto 32px auto; font-size: 1.05rem;">
+            მოდით, განვიხილოთ თქვენი ხედვა და ერთად შევქმნათ გამორჩეული ციფრული გამოცდილება თქვენი ბრენდისთვის.
+          </p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="contact.html" class="btn btn-primary">დავიწყოთ თანამშრომლობა</a>
+            <a href="about.html" class="btn btn-outline">ვრცლად ჩემს გამოცდილებაზე</a>
+          </div>
+        </section>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       SITE FOOTER (<footer>)
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="site-logo">
+            <div class="logo-symbol">DB</div>
+            <div class="logo-text">
+              <span class="logo-name">დავით ბერიძე</span>
+              <span class="logo-sub">Design & Code</span>
+            </div>
+          </a>
+          <p>თანამედროვე ციფრული პროდუქტების დიზაინი და Frontend არქიტექტურა. ხარისხი, რომელიც ქმნის უპირატესობას.</p>
+          <div class="social-links">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">in</a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">gh</a>
+            <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Dribbble">dr</a>
+            <a href="https://behance.net" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Behance">be</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>ნავიგაცია</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">მთავარი</a></li>
+            <li><a href="about.html">ჩემ შესახებ</a></li>
+            <li><a href="projects.html">პროექტები</a></li>
+            <li><a href="contact.html">კონტაქტი</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>სერვისები</h4>
+          <ul class="footer-links">
+            <li><a href="projects.html">UI/UX დიზაინი</a></li>
+            <li><a href="projects.html">Frontend დეველოპმენტი</a></li>
+            <li><a href="projects.html">დიზაინ სისტემები</a></li>
+            <li><a href="contact.html">კონსულტაცია & აუდიტი</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>კონტაქტი</h4>
+          <ul class="footer-links">
+            <li style="color: var(--text-secondary);">📍 თბილისი, საქართველო / Remote</li>
+            <li><a href="mailto:david.beridze.design@gmail.com">✉ david.beridze.design@gmail.com</a></li>
+            <li><a href="tel:+995599000000">📞 +995 599 00 00 00</a></li>
+            <li style="color: var(--emerald-light); font-weight: 600; margin-top: 8px;">● ხელმისაწვდომი ახალი შეკვეთებისთვის</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © <span id="current-year">2026</span> დავით ბერიძე. ყველა უფლება დაცულია.
+        </div>
+        <button class="back-to-top" aria-label="ზემოთ დაბრუნება">
+          <span>ზემოთ დაბრუნება</span>
+          <span>↑</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Details Modal Component -->
+  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-label="პროექტის დეტალები">
+    <div class="modal-container">
+      <button class="modal-close" aria-label="დახურვა">✕</button>
+      <div id="modal-details-content">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
