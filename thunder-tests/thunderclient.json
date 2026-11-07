@@ -1,0 +1,28 @@
+[
+  {
+    "_id": "11111111-2222-4333-8444-555555555501",
+    "colId": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+    "containerId": "",
+    "name": "GET — თანამშრომლების წამოღება",
+    "url": "https://jsonplaceholder.typicode.com/users",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2026-11-07T10:25:00.000Z",
+    "modified": "2026-11-07T10:47:00.000Z",
+    "headers": [
+      {
+        "name": "Accept",
+        "value": "application/json"
+      }
+    ],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  }
+]

@@ -3,564 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>დავით ბერიძე — Lead UI/UX დიზაინერი & Frontend არქიტექტორი</title>
-  <meta name="description" content="დავით ბერიძის პროფესიონალური პორტფოლიო. ექსკლუზიური ციფრული გამოცდილება, UI/UX დიზაინი, თანამედროვე Frontend არქიტექტურა და ინოვაციური ვებ-სისტემები.">
-  
-  <!-- Google Fonts: Noto Sans Georgian & Inter -->
+  <meta name="theme-color" content="#0b0b0e">
+  <title>ნიკოლოზი — Lead UI/UX დიზაინერი &amp; Frontend არქიტექტორი</title>
+  <meta name="description" content="ნიკოლოზის პროფესიონალური პორტფოლიო. Lead UI/UX დიზაინერი და Frontend არქიტექტორი — მასშტაბირებადი დიზაინ-სისტემები, თანამედროვე ვებ-არქიტექტურა და ციფრული პროდუქტები.">
+
+  <!-- Google Fonts: Syne, Inter, JetBrains Mono & Noto Sans Georgian -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- External Master Stylesheet -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Restore Dynamic HSL Accent Before First Paint -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('portfolio-accent');
+        var allowed = ['262 83% 70%', '218 90% 68%', '188 75% 58%', '158 64% 55%', '40 95% 62%', '328 82% 68%'];
+        if (saved && allowed.indexOf(saved) !== -1) {
+          document.documentElement.style.setProperty('--primary', saved);
+          document.documentElement.style.setProperty('--ring', saved);
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Master Architectural Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
-
-  <!-- Embedded Component Styles -->
-  <style>
-    /* Hero Section Specific Styles */
-    .hero-section {
-      position: relative;
-      padding: 70px 0 90px 0;
-      overflow: hidden;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      align-items: center;
-      gap: 60px;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-greeting {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .hero-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 24px;
-    }
-
-    .hero-desc {
-      font-size: 1.18rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      margin-bottom: 36px;
-      max-width: 580px;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    /* Hero Visual Card with Glowing Emerald Persona */
-    .hero-visual-wrapper {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .hero-glow-backdrop {
-      position: absolute;
-      width: 105%;
-      height: 105%;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(13, 148, 136, 0.12) 40%, transparent 70%);
-      filter: blur(40px);
-      z-index: 1;
-      border-radius: 50%;
-    }
-
-    .hero-photo-card {
-      position: relative;
-      z-index: 2;
-      border-radius: 28px;
-      background: linear-gradient(145deg, rgba(20, 30, 42, 0.8) 0%, rgba(10, 15, 22, 0.95) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 35px rgba(16, 185, 129, 0.18);
-      padding: 16px;
-      backdrop-filter: blur(16px);
-      max-width: 440px;
-      width: 100%;
-      transition: transform var(--transition-normal);
-    }
-
-    .hero-photo-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(16, 185, 129, 0.45);
-      box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.8), 0 0 50px rgba(16, 185, 129, 0.3);
-    }
-
-    .hero-photo-inner {
-      border-radius: 20px;
-      overflow: hidden;
-      background: #090c10;
-      position: relative;
-      aspect-ratio: 1 / 1.15;
-    }
-
-    .hero-photo-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .hero-photo-card:hover .hero-photo-img {
-      transform: scale(1.03);
-    }
-
-    /* Floating Badges on Hero Card */
-    .floating-badge {
-      position: absolute;
-      z-index: 3;
-      background: rgba(15, 23, 35, 0.85);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      backdrop-filter: blur(12px);
-      padding: 12px 18px;
-      border-radius: var(--radius-md);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      animation: float-badge 4s infinite ease-in-out;
-    }
-
-    .badge-top-right {
-      top: 25px;
-      right: -25px;
-      animation-delay: 0s;
-    }
-
-    .badge-bottom-left {
-      bottom: 25px;
-      left: -25px;
-      animation-delay: 2s;
-    }
-
-    @keyframes float-badge {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .floating-badge-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--emerald-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-    }
-
-    .floating-badge-text strong {
-      display: block;
-      color: var(--text-primary);
-      font-size: 0.92rem;
-      line-height: 1.2;
-    }
-
-    .floating-badge-text span {
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-    }
-
-    /* Featured Projects Grid on Index */
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-    }
-
-    .project-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: all var(--transition-normal);
-    }
-
-    .project-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--emerald-border);
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 30px rgba(16, 185, 129, 0.15);
-    }
-
-    .project-thumb {
-      position: relative;
-      width: 100%;
-      height: 220px;
-      overflow: hidden;
-      background: #0d131a;
-    }
-
-    .project-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .project-card:hover .project-thumb img {
-      transform: scale(1.06);
-    }
-
-    .project-tag {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      background: rgba(10, 15, 20, 0.85);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      color: var(--emerald-light);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: var(--radius-full);
-      backdrop-filter: blur(8px);
-    }
-
-    .project-body {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .project-title {
-      font-size: 1.25rem;
-      margin-bottom: 10px;
-      color: var(--text-primary);
-    }
-
-    .project-excerpt {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 20px;
-      flex-grow: 1;
-    }
-
-    /* Philosophy / Value Pillars */
-    .philosophy-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-    }
-
-    .philosophy-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 36px 28px;
-      transition: all var(--transition-normal);
-      position: relative;
-    }
-
-    .philosophy-card:hover {
-      border-color: var(--emerald-border);
-      transform: translateY(-6px);
-      background: var(--bg-surface-elevated);
-    }
-
-    .philosophy-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(13, 148, 136, 0.1));
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: var(--emerald-light);
-      margin-bottom: 24px;
-    }
-
-    .philosophy-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 12px;
-    }
-
-    .philosophy-card p {
-      font-size: 0.94rem;
-      line-height: 1.65;
-    }
-
-    /* Executive Quote Aside */
-    .executive-aside {
-      background: linear-gradient(135deg, rgba(19, 27, 36, 0.9) 0%, rgba(13, 20, 28, 0.95) 100%);
-      border: 1px solid var(--emerald-border);
-      border-radius: var(--radius-lg);
-      padding: 48px;
-      position: relative;
-      margin: 80px 0;
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
-    }
-
-    .quote-content {
-      max-width: 820px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
-    }
-
-    .quote-mark {
-      font-size: 4rem;
-      line-height: 1;
-      color: var(--emerald-teal);
-      opacity: 0.4;
-      font-family: Georgia, serif;
-      margin-bottom: -15px;
-    }
-
-    .quote-text {
-      font-size: 1.35rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      line-height: 1.7;
-      margin-bottom: 24px;
-      font-style: italic;
-    }
-
-    .quote-author {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-    }
-
-    .quote-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      border: 2px solid var(--emerald-light);
-      overflow: hidden;
-    }
-
-    .quote-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .quote-author-info {
-      text-align: left;
-    }
-
-    .quote-author-name {
-      font-weight: 700;
-      color: var(--text-primary);
-      font-size: 1rem;
-    }
-
-    .quote-author-role {
-      font-size: 0.82rem;
-      color: var(--emerald-light);
-    }
-
-    /* CTA Section */
-    .cta-banner {
-      background: radial-gradient(circle at center, rgba(16, 185, 129, 0.15) 0%, rgba(13, 20, 28, 0.8) 100%), var(--bg-surface);
-      border: 1px solid var(--emerald-border);
-      border-radius: var(--radius-lg);
-      padding: clamp(36px, 6vw, 64px) clamp(20px, 5vw, 40px);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-banner h2 {
-      font-size: clamp(1.6rem, 3.8vw, 2.3rem);
-      margin-bottom: 16px;
-    }
-
-    @media (max-width: 1200px) {
-      .hero-grid {
-        gap: 40px;
-      }
-      .hero-title {
-        font-size: clamp(2.4rem, 4vw, 3.1rem);
-      }
-      .badge-top-right {
-        right: -10px;
-      }
-      .badge-bottom-left {
-        left: -10px;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .hero-section {
-        padding: 50px 0 70px 0;
-      }
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-        text-align: center;
-      }
-      .hero-desc {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .hero-actions {
-        justify-content: center;
-      }
-      .featured-grid, .philosophy-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-      }
-      .badge-top-right {
-        right: -8px;
-      }
-      .badge-bottom-left {
-        left: -8px;
-      }
-      .executive-aside {
-        padding: 36px 28px;
-        margin: 60px 0;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-section {
-        padding: 36px 0 56px 0;
-      }
-      .hero-title {
-        font-size: clamp(1.95rem, 6.5vw, 2.45rem);
-        overflow-wrap: break-word;
-      }
-      .hero-desc {
-        font-size: 1.02rem;
-        margin-bottom: 28px;
-      }
-      .featured-grid, .philosophy-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .philosophy-card {
-        padding: 28px 22px;
-      }
-      .executive-aside {
-        padding: 28px 20px;
-        margin: 48px 0;
-      }
-      .quote-text {
-        font-size: 1.06rem;
-      }
-      .floating-badge {
-        padding: 8px 12px;
-        gap: 8px;
-      }
-      .floating-badge-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 0.95rem;
-      }
-      .floating-badge-text strong {
-        font-size: 0.82rem;
-      }
-      .floating-badge-text span {
-        font-size: 0.7rem;
-      }
-      .badge-top-right {
-        top: 12px;
-        right: 8px;
-      }
-      .badge-bottom-left {
-        bottom: 12px;
-        left: 8px;
-      }
-      .hero-photo-card {
-        max-width: 340px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .hero-actions {
-        flex-direction: column;
-        width: 100%;
-      }
-      .hero-actions .btn {
-        width: 100%;
-      }
-      .cta-banner .btn {
-        width: 100%;
-      }
-      .floating-badge {
-        display: none;
-      }
-      .hero-photo-card {
-        max-width: 300px;
-        padding: 12px;
-      }
-      .quote-author {
-        flex-direction: column;
-        text-align: center;
-      }
-      .quote-author-info {
-        text-align: center;
-      }
-    }
-  </style>
 </head>
-<body>
+<body id="top">
+  <!-- Custom Dynamic Accent Cursor -->
+  <div class="custom-cursor-dot" aria-hidden="true"></div>
+  <div class="custom-cursor-ring" aria-hidden="true"></div>
+
+  <!-- Right-Edge 2px Vertical Scroll Progress Bar -->
+  <div class="scroll-progress-track" aria-hidden="true">
+    <div class="scroll-progress-bar"></div>
+  </div>
+
+  <!-- Bottom-Left Fixed Social Rail -->
+  <aside class="floating-social-rail" aria-label="სოციალური ქსელები">
+    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+    </a>
+    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" aria-label="Dribbble" title="Dribbble">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"/><path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"/><path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"/></svg>
+    </a>
+    <a href="https://behance.net" target="_blank" rel="noopener noreferrer" aria-label="Behance" title="Behance">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h6a3 3 0 0 1 0 6 3.5 3.5 0 0 1 0 7H3V6z"/><path d="M3 12h6"/><path d="M14 15h7a3.5 3.5 0 1 0-3.5 3.5c1.3 0 2.4-.6 3-1.5"/><path d="M15 9h5"/></svg>
+    </a>
+    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+    </a>
+  </aside>
+
+  <!-- Bottom-Right Fixed 6-Color Dynamic Accent Picker -->
+  <aside class="accent-switcher" aria-label="აქცენტის ფერის არჩევა">
+    <button type="button" class="accent-dot-btn" data-accent-hsl="262 83% 70%" style="background-color: hsl(262, 83%, 70%);" aria-label="იისფერი აქცენტი" aria-pressed="true" title="Violet">✓</button>
+    <button type="button" class="accent-dot-btn" data-accent-hsl="218 90% 68%" style="background-color: hsl(218, 90%, 68%);" aria-label="ლურჯი აქცენტი" aria-pressed="false" title="Blue"></button>
+    <button type="button" class="accent-dot-btn" data-accent-hsl="188 75% 58%" style="background-color: hsl(188, 75%, 58%);" aria-label="ცისფერი აქცენტი" aria-pressed="false" title="Cyan"></button>
+    <button type="button" class="accent-dot-btn" data-accent-hsl="158 64% 55%" style="background-color: hsl(158, 64%, 55%);" aria-label="ზურმუხტისფერი აქცენტი" aria-pressed="false" title="Emerald"></button>
+    <button type="button" class="accent-dot-btn" data-accent-hsl="40 95% 62%" style="background-color: hsl(40, 95%, 62%);" aria-label="ქარვისფერი აქცენტი" aria-pressed="false" title="Amber"></button>
+    <button type="button" class="accent-dot-btn" data-accent-hsl="328 82% 68%" style="background-color: hsl(328, 82%, 68%);" aria-label="მაჯენტა აქცენტი" aria-pressed="false" title="Magenta"></button>
+  </aside>
 
   <!-- ==========================================================================
-       HEADER & NAVIGATION (<header>, <nav>)
+       FIXED ARCHITECTURAL HEADER & MOBILE BURGER MENU (<= 768px)
        ========================================================================== -->
   <header class="site-header">
+    <div class="site-header-bg" aria-hidden="true"></div>
     <div class="container header-container">
-      <a href="index.html" class="site-logo" aria-label="დავით ბერიძე — მთავარი">
-        <div class="logo-symbol">DB</div>
+      <a href="#home" class="site-logo" aria-label="ნიკოლოზი — მთავარი">
+        <div class="logo-avatar">
+          <img src="assets/images/profile.png" alt="ნიკოლოზი">
+        </div>
         <div class="logo-text">
-          <span class="logo-name">დავით ბერიძე</span>
-          <span class="logo-sub">Design & Code</span>
+          <span class="logo-name">ნიკოლოზი</span>
+          <span class="logo-sub">Design &amp; Code Studio</span>
         </div>
       </a>
 
-      <!-- Main Navigation Menu (Desktop Bar + Tablet/Phone Slide Drawer) -->
+      <!-- Navigation (Desktop Pill Bar + Centered Full-Screen Burger Overlay <= 768px) -->
       <nav class="main-nav" id="main-navigation" aria-label="მთავარი ნავიგაცია">
-        <div class="nav-drawer-header">
-          <span class="nav-drawer-label">მენიუ</span>
-          <span class="nav-drawer-status"><span class="badge-dot"></span> Online</span>
-        </div>
-
         <ul class="nav-list">
-          <li><a href="index.html" class="nav-link active" aria-current="page">მთავარი</a></li>
-          <li><a href="about.html" class="nav-link">ჩემ შესახებ</a></li>
-          <li><a href="projects.html" class="nav-link">პროექტები</a></li>
-          <li><a href="contact.html" class="nav-link">კონტაქტი</a></li>
+          <li><a href="#experience" class="nav-link">გამოცდილება</a></li>
+          <li><a href="#work" class="nav-link">პროექტები</a></li>
+          <li><a href="#employees" class="nav-link">თანამშრომლები</a></li>
+          <li><a href="#skills" class="nav-link">ტექნოლოგიები</a></li>
+          <li><a href="#contact" class="nav-link">კონტაქტი</a></li>
         </ul>
 
         <div class="nav-drawer-footer">
-          <a href="contact.html" class="btn btn-primary">დამიკავშირდით →</a>
-          <div class="nav-drawer-contact">
-            <span>თბილისი, საქართველო / Remote</span>
-            <a href="mailto:david.beridze.design@gmail.com">david.beridze.design@gmail.com</a>
-          </div>
+          <a href="about.html" class="pill-btn pill-btn-outline">ჩემ შესახებ ↗</a>
+          <a href="#contact" class="pill-btn pill-btn-primary">დამიკავშირდით →</a>
         </div>
       </nav>
 
       <div class="header-actions">
-        <a href="contact.html" class="btn btn-primary">დამიკავშირდით</a>
-        <button class="mobile-nav-toggle" type="button" aria-label="მენიუს გახსნა" aria-expanded="false" aria-controls="main-navigation">
+        <a href="about.html" class="header-cv-btn">ჩემ შესახებ</a>
+        <button type="button" id="burger-btn" class="mobile-nav-toggle" aria-label="მენიუს გახსნა/დახურვა" aria-expanded="false" aria-controls="main-navigation">
           <span class="hamburger-box" aria-hidden="true">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
@@ -570,315 +112,882 @@
       </div>
     </div>
   </header>
-  <div class="nav-backdrop" aria-hidden="true"></div>
 
   <!-- ==========================================================================
-       MAIN CONTENT (<main>)
+       MAIN SINGLE-PAGE ARCHITECTURAL PORTFOLIO
        ========================================================================== -->
   <main>
-    <!-- HERO SECTION (<section>) -->
-    <section class="hero-section">
+
+    <!-- 1. HERO SECTION (#home) -->
+    <section id="home" class="hero-arch">
       <div class="container">
-        <div class="hero-grid">
-          
-          <!-- Hero Text Column -->
-          <div class="hero-content">
-            <div class="hero-greeting">
-              <span class="badge">
-                <span class="badge-dot"></span>
-                ღია ვარ ახალი თანამშრომლობისთვის
-              </span>
-            </div>
+        <div class="hero-arch-frame">
+          <div class="hero-arch-grid">
 
-            <h1 class="hero-title">
-              შევქმნათ <span class="text-gradient">ინოვაციური</span> ციფრული პროდუქტები
-            </h1>
+            <!-- Left Primary Column -->
+            <div class="hero-arch-main">
+              <h1 class="hero-arch-title">
+                Lead UI/UX დიზაინერი &amp; Frontend არქიტექტორი
+              </h1>
+              <p class="hero-arch-name">ნიკოლოზი</p>
+              <p class="hero-arch-bio">
+                10+ წელი მასშტაბირებადი ციფრული პროდუქტების, დიზაინ-სისტემებისა და მაღალწარმადობიანი ვებ-არქიტექტურის შექმნაში. ვხელმძღვანელობ პროდუქტის სრულ ციკლს — UX კვლევიდან და ინტერაქციული პროტოტიპირებიდან სუფთა, წარმოებაში გაშვებულ Frontend კოდამდე.
+              </p>
 
-            <p class="hero-desc">
-              გამარჯობა, მე ვარ <strong>დავით ბერიძე</strong> — გამოცდილი Lead UI/UX დიზაინერი და Frontend არქიტექტორი. 
-              ვქმნი უმაღლესი დონის, ვიზუალურად შთამბეჭდავ და ტექნიკურად გამართულ ვებ-სისტემებს, რომლებიც ზრდიან ბიზნესის ღირებულებას.
-            </p>
-
-            <div class="hero-actions">
-              <a href="projects.html" class="btn btn-primary">
-                <span>პროექტების ნახვა</span>
-                <span>→</span>
-              </a>
-              <a href="about.html" class="btn btn-outline">
-                <span>გაიგეთ მეტი ჩემ შესახებ</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Hero Profile Image Column (User Attached Photo) -->
-          <div class="hero-visual-wrapper">
-            <div class="hero-glow-backdrop"></div>
-
-            <div class="hero-photo-card">
-              <div class="hero-photo-inner">
-                <img src="assets/images/profile.png" alt="დავით ბერიძე — Lead UI/UX დიზაინერი & Frontend არქიტექტორი" class="hero-photo-img" loading="eager">
+              <div class="hero-arch-actions">
+                <a href="#work" class="pill-btn pill-btn-primary">
+                  <span>პროექტების ნახვა</span>
+                  <span aria-hidden="true">↘</span>
+                </a>
+                <a href="about.html" class="pill-btn pill-btn-outline">
+                  <span>სრული პროფილი</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
               </div>
+            </div>
 
-              <!-- Floating Micro-Badges -->
-              <div class="floating-badge badge-top-right">
-                <div class="floating-badge-icon">✦</div>
-                <div class="floating-badge-text">
-                  <strong>10+ წელი</strong>
-                  <span>პროფესიული გამოცდილება</span>
+            <!-- Right Architectural Metadata Aside -->
+            <aside class="hero-arch-aside" aria-label="პროფილის მოკლე მონაცემები">
+              <a href="#contact" class="studio-badge-link">
+                <div class="studio-badge-icon" aria-hidden="true">N</div>
+                <div>
+                  <span class="studio-badge-title">Design &amp; Code Studio</span>
+                  <span class="studio-badge-url">TBILISI · REMOTE ↗</span>
+                </div>
+              </a>
+
+              <dl class="meta-dl">
+                <div class="meta-row">
+                  <dt>ლოკაცია</dt>
+                  <dd>თბილისი, საქართველო</dd>
+                </div>
+                <div class="meta-row">
+                  <dt>გამოცდილება</dt>
+                  <dd>10+ წელი</dd>
+                </div>
+                <div class="meta-row">
+                  <dt>ჩაბარებული</dt>
+                  <dd>45+ პროექტი</dd>
+                </div>
+                <div class="meta-row">
+                  <dt>ფოკუსი</dt>
+                  <dd>UI/UX, Frontend, Systems</dd>
+                </div>
+                <div class="meta-row">
+                  <dt>ენები</dt>
+                  <dd>ქართული, English</dd>
+                </div>
+              </dl>
+
+              <div class="hero-aside-footer">
+                <a href="mailto:nikoloz.design@gmail.com" class="hero-email-link">nikoloz.design@gmail.com</a>
+                <div class="social-circle-row">
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="GitHub" title="GitHub">gh</a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="LinkedIn" title="LinkedIn">in</a>
+                  <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Dribbble" title="Dribbble">dr</a>
+                  <a href="https://behance.net" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Behance" title="Behance">be</a>
+                  <a href="projects.html" class="social-circle-btn" aria-label="კატალოგი" title="პროექტების კატალოგი">↗</a>
                 </div>
               </div>
+            </aside>
 
-              <div class="floating-badge badge-bottom-left">
-                <div class="floating-badge-icon">★</div>
-                <div class="floating-badge-text">
-                  <strong>99% კმაყოფილება</strong>
-                  <span>საერთაშორისო პარტნიორები</span>
-                </div>
-              </div>
-            </div>
           </div>
-
-        </div>
-
-        <!-- Metric Counter Strip (<section>) -->
-        <section class="metrics-strip" aria-label="ძირითადი მიღწევები">
-          <div class="metric-item">
-            <div class="metric-number text-gradient-emerald">10+</div>
-            <div class="metric-label">წლიანი გამოცდილება ინდუსტრიაში</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-number text-gradient-emerald">45+</div>
-            <div class="metric-label">წარმატებით დანერგილი პროექტი</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-number text-gradient-emerald">12</div>
-            <div class="metric-label">საერთაშორისო დიზაინ ჯილდო</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-number text-gradient-emerald">100%</div>
-            <div class="metric-label">სუფთა კოდი & თანამედროვე სტეკი</div>
-          </div>
-        </section>
-
-      </div>
-    </section>
-
-    <!-- FEATURED PROJECTS PREVIEW (<section>) -->
-    <section class="section-padding" style="background: var(--bg-secondary);">
-      <div class="container">
-        <header class="section-header">
-          <span class="badge">რჩეული ნამუშევრები</span>
-          <h2 class="section-title">ბოლოდროინდელი პროექტები</h2>
-          <p class="section-subtitle">გაეცანით ჩემს მიერ შექმნილ უახლეს ციფრულ გადაწყვეტებს, სადაც ელეგანტური UI/UX ხვდება უზადო Frontend კოდს.</p>
-        </header>
-
-        <div class="featured-grid">
-          
-          <!-- Project 1 (<article>) -->
-          <article class="project-card">
-            <div class="project-thumb">
-              <span class="project-tag">FinTech & ანალიტიკა</span>
-              <img src="assets/images/project1.jpg" alt="Quantum Analytics პლატფორმა" loading="lazy">
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Quantum Analytics პლატფორმა</h3>
-              <p class="project-excerpt">ინოვაციური ფინანსური ანალიტიკის პლატფორმა საინვესტიციო მენეჯმენტისთვის რეალურ დროში მონაცემთა ვიზუალიზაციით.</p>
-              <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
-                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">React</span>
-                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">D3.js</span>
-                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">UI/UX</span>
-              </div>
-              <button onclick="openProjectModal('fintech')" class="btn btn-outline" style="width: 100%;">დეტალების ნახვა</button>
-            </div>
-          </article>
-
-          <!-- Project 2 (<article>) -->
-          <article class="project-card">
-            <div class="project-thumb">
-              <span class="project-tag">Luxury ელ-კომერცია</span>
-              <img src="assets/images/project2.jpg" alt="Aura Atelier ექსკლუზიური მოდის ელ-მაღაზია" loading="lazy">
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Aura Atelier ონლაინ ბუტიკი</h3>
-              <p class="project-excerpt">ექსკლუზიური მოდის ელექტრონული მაღაზია მინიმალისტური ესთეტიკით, ზურმუხტისფერი აქცენტებით და მაღალი კონვერსიით.</p>
-              <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
-                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">Next.js</span>
-                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">Design System</span>
-                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">CSS3 Micro</span>
-              </div>
-              <button onclick="openProjectModal('ecommerce')" class="btn btn-outline" style="width: 100%;">დეტალების ნახვა</button>
-            </div>
-          </article>
-
-          <!-- Project 3 (<article>) -->
-          <article class="project-card">
-            <div class="project-thumb">
-              <span class="project-tag">AI & SaaS სისტემები</span>
-              <img src="assets/images/project3.jpg" alt="Synthesis AI დიზაინ-სისტემების სტუდია" loading="lazy">
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Synthesis AI დიზაინ სტუდია</h3>
-              <p class="project-excerpt">ხელოვნური ინტელექტით მართვადი დიზაინ-სისტემების ორკესტრაციის პლატფორმა გუნდური პროდუქტიულობისთვის.</p>
-              <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
-                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">SaaS UI</span>
-                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">Vue 3</span>
-                <span style="font-size: 0.78rem; background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 4px; color: var(--emerald-light);">Canvas API</span>
-              </div>
-              <button onclick="openProjectModal('saas')" class="btn btn-outline" style="width: 100%;">დეტალების ნახვა</button>
-            </div>
-          </article>
-
-        </div>
-
-        <div style="text-align: center; margin-top: 50px;">
-          <a href="projects.html" class="btn btn-primary">ყველა პროექტის დათვალიერება →</a>
         </div>
       </div>
     </section>
 
-    <!-- DESIGN PHILOSOPHY SECTION (<section>) -->
-    <section class="section-padding">
+    <!-- 2. CAREER / EXPERIENCE SECTION (#experience) -->
+    <section id="experience" class="section-block">
       <div class="container">
-        <header class="section-header">
-          <span class="badge">მიდგომა და ფილოსოფია</span>
-          <h2 class="section-title">რატომ ირჩევენ ჩემთან მუშაობას?</h2>
-          <p class="section-subtitle">დიზაინი არ არის მხოლოდ ვიზუალი — ეს არის სტრატეგიული ინსტრუმენტი თქვენი მიზნების მისაღწევად.</p>
-        </header>
-
-        <div class="philosophy-grid">
-          
-          <article class="philosophy-card">
-            <div class="philosophy-icon">🎨</div>
-            <h3>ესთეტიკისა და ფუნქციონალის ბალანსი</h3>
-            <p>თითოეული პიქსელი ემსახურება მომხმარებლის გამოცდილებას. დიზაინი იზიდავს ერთი შეხედვით, ხოლო ლოგიკა ხდის მას ინტუიციურს.</p>
-          </article>
-
-          <article class="philosophy-card">
-            <div class="philosophy-icon">⚡</div>
-            <h3>უმაღლესი სისწრაფე და ოპტიმიზაცია</h3>
-            <p>სუფთა, სტანდარტებთან შესაბამისი HTML5/CSS კოდი, მინიმალური ჩატვირთვის დრო და 99+ ქულა Google Lighthouse-ში.</p>
-          </article>
-
-          <article class="philosophy-card">
-            <div class="philosophy-icon">💎</div>
-            <h3>მასშტაბირებადი დიზაინ-სისტემები</h3>
-            <p>მოდულური არქიტექტურა, კომპონენტური ბაზა და დოკუმენტირებული წესები, რაც პროდუქტის განვითარებას ხდის მარტივსა და ეკონომიურს.</p>
-          </article>
-
-        </div>
-
-        <!-- EXECUTIVE ASIDE QUOTE (<aside>) -->
-        <aside class="executive-aside" aria-label="პროფესიული კრედო">
-          <div class="quote-content">
-            <div class="quote-mark">“</div>
-            <blockquote class="quote-text">
-              „ჭეშმარიტი ფუფუნება ციფრულ სამყაროში არის სიმარტივისა და დახვეწილობის ჰარმონია. როდესაც კოდი და ვიზუალი სრულყოფილად ერწყმის ერთმანეთს, იბადება პროდუქტი, რომელიც დროს უძლებს.“
-            </blockquote>
-            <div class="quote-author">
-              <div class="quote-avatar">
-                <img src="assets/images/profile.png" alt="დავით ბერიძე">
-              </div>
-              <div class="quote-author-info">
-                <div class="quote-author-name">დავით ბერიძე</div>
-                <div class="quote-author-role">Lead UI/UX დიზაინერი & Frontend არქიტექტორი</div>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        <!-- CTA SECTION (<section>) -->
-        <section class="cta-banner" aria-label="თანამშრომლობის შეთავაზება">
-          <h2>გაქვთ საინტერესო პროექტი ჩაფიქრებული?</h2>
-          <p style="color: var(--text-secondary); max-width: 580px; margin: 0 auto 32px auto; font-size: 1.05rem;">
-            მოდით, განვიხილოთ თქვენი ხედვა და ერთად შევქმნათ გამორჩეული ციფრული გამოცდილება თქვენი ბრენდისთვის.
+        <div class="section-heading-row">
+          <h2 class="section-heading">კარიერული <span class="text-primary">გზა</span></h2>
+          <p class="section-desc">
+            ათწლიანი პროფესიული ევოლუცია — UI/UX ინჟინერიიდან გლობალური დიზაინ-სისტემებისა და Frontend არქიტექტურის ლიდერობამდე.
           </p>
-          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-            <a href="contact.html" class="btn btn-primary">დავიწყოთ თანამშრომლობა</a>
-            <a href="about.html" class="btn btn-outline">ვრცლად ჩემს გამოცდილებაზე</a>
-          </div>
-        </section>
+        </div>
 
+        <div class="career-list">
+
+          <!-- Career Item 1: 2022 -->
+          <article class="career-item">
+            <div class="career-item-top">
+              <span class="career-year">2022</span>
+              <span class="career-line" aria-hidden="true"></span>
+              <span class="career-dot" aria-hidden="true"></span>
+            </div>
+            <div class="career-body-frame">
+              <div class="career-grid">
+                <div class="career-left">
+                  <div class="career-company-head">
+                    <div class="career-company-icon" aria-hidden="true">OT</div>
+                    <div>
+                      <div class="career-company-name">OmniTech Solutions</div>
+                      <div class="career-period">2022 – დღემდე · ლონდონი / Remote</div>
+                    </div>
+                  </div>
+                  <h3 class="career-role">Principal Product Designer &amp; Frontend Lead</h3>
+                  <p class="career-summary">
+                    მრავალპლატფორმული დიზაინ-სისტემების არქიტექტურა და საინჟინრო გუნდების ტექნიკური ხელმძღვანელობა B2B SaaS ეკოსისტემისთვის.
+                  </p>
+                  <dl class="career-metrics">
+                    <div class="career-metric-row">
+                      <dt>გუნდის მასშტაბი</dt>
+                      <dd>20 სპეციალისტი</dd>
+                    </div>
+                    <div class="career-metric-row">
+                      <dt>დანერგვის სისწრაფე</dt>
+                      <dd>+45% ზრდა</dd>
+                    </div>
+                    <div class="career-metric-row">
+                      <dt>პროდუქტები</dt>
+                      <dd>12 პლატფორმა</dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <div class="career-right">
+                  <div class="mono-tags">
+                    <span class="mono-tag">React</span>
+                    <span class="mono-tag">TypeScript</span>
+                    <span class="mono-tag">Next.js</span>
+                    <span class="mono-tag">Design Tokens</span>
+                    <span class="mono-tag">Figma Variables</span>
+                    <span class="mono-tag">Storybook</span>
+                    <span class="mono-tag">WCAG AAA</span>
+                  </div>
+                  <ul class="career-bullets">
+                    <li>შევქმენი და დავნერგე ერთიანი <strong>მრავალპლატფორმული დიზაინ-სისტემა</strong> 8 დიზაინერისა და 12 Frontend ინჟინრისთვის, რამაც ახალი ფუნქციონალის ჩაბარების დრო <strong>45%-ით შეამცირა</strong>.</li>
+                    <li>განვსაზღვრე კომპონენტური არქიტექტურა, Design Tokens ავტომატური CI/CD სინქრონიზაცია და <strong>99+ Lighthouse Performance</strong> სტანდარტი ყველა კლიენტურ აპლიკაციაში.</li>
+                    <li>ვხელმძღვანელობ პროდუქტის სტრატეგიულ UX აუდიტს, მომხმარებლის კვლევებსა და კოდის ხარისხის რევიუს საერთაშორისო გუნდებში.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Career Item 2: 2019 -->
+          <article class="career-item">
+            <div class="career-item-top">
+              <span class="career-year">2019</span>
+              <span class="career-line" aria-hidden="true"></span>
+              <span class="career-dot" aria-hidden="true"></span>
+            </div>
+            <div class="career-body-frame">
+              <div class="career-grid">
+                <div class="career-left">
+                  <div class="career-company-head">
+                    <div class="career-company-icon" aria-hidden="true">FE</div>
+                    <div>
+                      <div class="career-company-name">FinEdge Digital</div>
+                      <div class="career-period">2019 – 2022 · ევროპა / Remote</div>
+                    </div>
+                  </div>
+                  <h3 class="career-role">Senior UI/UX Designer &amp; Frontend Architect</h3>
+                  <p class="career-summary">
+                    მაღალი დატვირთვის მქონე FinTech დეშბორდების, ციფრული ბანკინგისა და ანალიტიკური ინტერფეისების პროექტირება.
+                  </p>
+                  <dl class="career-metrics">
+                    <div class="career-metric-row">
+                      <dt>კონვერსიის ზრდა</dt>
+                      <dd>+65%</dd>
+                    </div>
+                    <div class="career-metric-row">
+                      <dt>აქტიური მომხმარებელი</dt>
+                      <dd>500K+</dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <div class="career-right">
+                  <div class="mono-tags">
+                    <span class="mono-tag">Vue 3</span>
+                    <span class="mono-tag">D3.js</span>
+                    <span class="mono-tag">WebSockets</span>
+                    <span class="mono-tag">CSS Grid</span>
+                    <span class="mono-tag">Micro-interactions</span>
+                    <span class="mono-tag">A11y</span>
+                  </div>
+                  <ul class="career-bullets">
+                    <li>დავაპროექტე რეალურ დროში მომუშავე <strong>საინვესტიციო და სავაჭრო ტერმინალები</strong> WebSocket ნაკადებითა და ინტერაქციული D3.js ვიზუალიზაციით.</li>
+                    <li>მომხმარებლის გზის (User Journey) სრული რესტრუქტურიზაციით მობილური და ვებ-ბანკინგის ონბორდინგის კონვერსია <strong>65%-ით გაიზარდა</strong>.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Career Item 3: 2016 -->
+          <article class="career-item">
+            <div class="career-item-top">
+              <span class="career-year">2016</span>
+              <span class="career-line" aria-hidden="true"></span>
+              <span class="career-dot" aria-hidden="true"></span>
+            </div>
+            <div class="career-body-frame">
+              <div class="career-grid">
+                <div class="career-left">
+                  <div class="career-company-head">
+                    <div class="career-company-icon" aria-hidden="true">PC</div>
+                    <div>
+                      <div class="career-company-name">PixelCraft Studio</div>
+                      <div class="career-period">2016 – 2019 · თბილისი</div>
+                    </div>
+                  </div>
+                  <h3 class="career-role">UI/UX დიზაინერი &amp; Web დეველოპერი</h3>
+                  <p class="career-summary">
+                    პრემიუმ ბრენდების ვებ-პლატფორმების, ინტერაქციული კამპანიებისა და ელ-კომერციის სისტემების შექმნა.
+                  </p>
+                  <dl class="career-metrics">
+                    <div class="career-metric-row">
+                      <dt>ჩაბარებული პროექტები</dt>
+                      <dd>30+ საიტი</dd>
+                    </div>
+                    <div class="career-metric-row">
+                      <dt>Lighthouse ქულა</dt>
+                      <dd>99 / 100</dd>
+                    </div>
+                  </dl>
+                </div>
+
+                <div class="career-right">
+                  <div class="mono-tags">
+                    <span class="mono-tag">Semantic HTML5</span>
+                    <span class="mono-tag">Modern CSS3</span>
+                    <span class="mono-tag">JavaScript ES6+</span>
+                    <span class="mono-tag">SVG Motion</span>
+                    <span class="mono-tag">Responsive UI</span>
+                  </div>
+                  <ul class="career-bullets">
+                    <li>შევასრულე <strong>30-ზე მეტი კომერციული ვებ-პროექტი</strong> იდეიდან და ვიზუალური კონცეფციიდან სრულ რესპონსიულ იმპლემენტაციამდე.</li>
+                    <li>დავნერგე მსუბუქი, უსწრაფესი CSS/SVG მიკრო-ანიმაციების ბიბლიოთეკა სტუდიის შიდა პროექტებისთვის.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
       </div>
     </section>
+
+    <!-- 3. SHIPPED PROJECTS SECTION (#work) -->
+    <section id="work" class="section-block">
+      <div class="container">
+        <div class="section-heading-row">
+          <h2 class="section-heading">შესრულებული <span class="text-primary">პროექტები</span></h2>
+          <p class="section-desc">
+            ექვსი რჩეული პროდუქტი FinTech, ელ-კომერციის, AI SaaS-ისა და Web3 ეკოსისტემებიდან — <a href="projects.html" class="text-primary">სრული კატალოგი ↗</a>
+          </p>
+        </div>
+
+        <!-- Architectural Bottom-Underline Filter Tabs -->
+        <div class="arch-filter-bar" role="tablist" aria-label="პროექტების კატეგორიები">
+          <button type="button" class="arch-filter-btn is-active" data-filter="all" role="tab" aria-selected="true">ყველა (6)</button>
+          <button type="button" class="arch-filter-btn" data-filter="fintech" role="tab" aria-selected="false">FinTech</button>
+          <button type="button" class="arch-filter-btn" data-filter="ecommerce" role="tab" aria-selected="false">ელ-კომერცია</button>
+          <button type="button" class="arch-filter-btn" data-filter="saas" role="tab" aria-selected="false">SaaS &amp; AI</button>
+          <button type="button" class="arch-filter-btn" data-filter="web3" role="tab" aria-selected="false">მობილური &amp; Web3</button>
+        </div>
+
+        <!-- 2-Column Architectural Project Cards -->
+        <div class="arch-projects-grid">
+
+          <!-- Project 1: Quantum Analytics -->
+          <article class="arch-project-card" data-group="fintech">
+            <div class="arch-project-top">
+              <div class="arch-project-icon">
+                <img src="assets/images/project1.jpg" alt="Quantum Analytics" loading="lazy">
+              </div>
+              <div class="arch-project-meta">
+                <h3 class="arch-project-title">Quantum Analytics</h3>
+                <p class="arch-project-sub">რეალურ დროში ფინანსური ანალიტიკისა და ტრეიდინგის პლატფორმა</p>
+              </div>
+              <span class="arch-project-role">Lead Architect</span>
+            </div>
+            <div class="mono-tags">
+              <span class="mono-tag">React.js</span>
+              <span class="mono-tag">TypeScript</span>
+              <span class="mono-tag">D3.js</span>
+              <span class="mono-tag">WebSockets</span>
+            </div>
+            <ul class="arch-project-bullets">
+              <li>მილიონობით ტრანზაქციის ნაკადური ვიზუალიზაცია <strong>40%-ით გაზრდილი</strong> რენდერის სისწრაფით.</li>
+              <li>ინსტიტუციონალური ტრეიდერების სამუშაო გარემო, რომელმაც კონვერსია <strong>+65%-ით გააუმჯობესა</strong>.</li>
+            </ul>
+            <div class="arch-project-footer">
+              <a href="#modal-fintech" class="arch-project-link">ქეისის ნახვა <span aria-hidden="true">↗</span></a>
+              <span class="arch-project-kind">FinTech · 2025</span>
+            </div>
+          </article>
+
+          <!-- Project 2: Aura Atelier -->
+          <article class="arch-project-card" data-group="ecommerce">
+            <div class="arch-project-top">
+              <div class="arch-project-icon">
+                <img src="assets/images/project2.jpg" alt="Aura Atelier" loading="lazy">
+              </div>
+              <div class="arch-project-meta">
+                <h3 class="arch-project-title">Aura Atelier</h3>
+                <p class="arch-project-sub">არქიტექტურული მოდისა და ობიექტების ექსკლუზიური ონლაინ ბუტიკი</p>
+              </div>
+              <span class="arch-project-role">Creative Lead</span>
+            </div>
+            <div class="mono-tags">
+              <span class="mono-tag">Next.js</span>
+              <span class="mono-tag">Headless Shopify</span>
+              <span class="mono-tag">WebGL</span>
+              <span class="mono-tag">Design System</span>
+            </div>
+            <ul class="arch-project-bullets">
+              <li>ულტრა-სწრაფი ჩატვირთვა <strong>&lt; 0.6 წამში</strong> (Lighthouse 99) და უწყვეტი 3D პროდუქტის დათვალიერება.</li>
+              <li>მობილური Checkout-ის ოპტიმიზაციით ონლაინ გაყიდვები <strong>+82%-ით გაიზარდა</strong>.</li>
+            </ul>
+            <div class="arch-project-footer">
+              <a href="#modal-ecommerce" class="arch-project-link">ქეისის ნახვა <span aria-hidden="true">↗</span></a>
+              <span class="arch-project-kind">E-Commerce · 2025</span>
+            </div>
+          </article>
+
+          <!-- Project 3: Synthesis AI -->
+          <article class="arch-project-card" data-group="saas">
+            <div class="arch-project-top">
+              <div class="arch-project-icon">
+                <img src="assets/images/project3.jpg" alt="Synthesis AI" loading="lazy">
+              </div>
+              <div class="arch-project-meta">
+                <h3 class="arch-project-title">Synthesis AI Studio</h3>
+                <p class="arch-project-sub">AI-ით მართვადი დიზაინ-სისტემების ორკესტრაციისა და ტოკენების გარემო</p>
+              </div>
+              <span class="arch-project-role">Product Lead</span>
+            </div>
+            <div class="mono-tags">
+              <span class="mono-tag">Vue 3</span>
+              <span class="mono-tag">Canvas API</span>
+              <span class="mono-tag">Design Tokens</span>
+              <span class="mono-tag">GraphQL</span>
+            </div>
+            <ul class="arch-project-bullets">
+              <li>ემსახურება <strong>120,000+ აქტიურ დეველოპერს</strong> და აჩქარებს UI კომპონენტების მიწოდებას <strong>3.5-ჯერ</strong>.</li>
+              <li>Figma-დან პირდაპირ წარმოების კოდში ტოკენების ორმხრივი სინქრონიზაცია.</li>
+            </ul>
+            <div class="arch-project-footer">
+              <a href="#modal-saas" class="arch-project-link">ქეისის ნახვა <span aria-hidden="true">↗</span></a>
+              <span class="arch-project-kind">AI SaaS · 2025</span>
+            </div>
+          </article>
+
+          <!-- Project 4: Horizon Mobile Banking -->
+          <article class="arch-project-card" data-group="fintech web3">
+            <div class="arch-project-top">
+              <div class="arch-project-icon" aria-hidden="true">HB</div>
+              <div class="arch-project-meta">
+                <h3 class="arch-project-title">Horizon Banking</h3>
+                <p class="arch-project-sub">ახალი თაობის მობილური ბანკინგი და პერსონალური ფინანსების ეკოსისტემა</p>
+              </div>
+              <span class="arch-project-role">Principal UX</span>
+            </div>
+            <div class="mono-tags">
+              <span class="mono-tag">React Native</span>
+              <span class="mono-tag">Figma Systems</span>
+              <span class="mono-tag">Biometrics</span>
+              <span class="mono-tag">WCAG AAA</span>
+            </div>
+            <ul class="arch-project-bullets">
+              <li>App Store-ზე <strong>4.9 ★ რეიტინგი</strong> 45,000+ მომხმარებლის შეფასებით.</li>
+              <li>P2P გადარიცხვებისა და ბიომეტრიული ავტორიზაციის დრო <strong>50%-ით შემცირდა</strong>.</li>
+            </ul>
+            <div class="arch-project-footer">
+              <a href="#modal-banking" class="arch-project-link">ქეისის ნახვა <span aria-hidden="true">↗</span></a>
+              <span class="arch-project-kind">Mobile FinTech · 2024</span>
+            </div>
+          </article>
+
+          <!-- Project 5: BioPulse Health -->
+          <article class="arch-project-card" data-group="saas">
+            <div class="arch-project-top">
+              <div class="arch-project-icon" aria-hidden="true">BP</div>
+              <div class="arch-project-meta">
+                <h3 class="arch-project-title">BioPulse Health</h3>
+                <p class="arch-project-sub">ტელემედიცინისა და პაციენტთა მონიტორინგის დაცული ვებ-პორტალი</p>
+              </div>
+              <span class="arch-project-role">UX &amp; Frontend</span>
+            </div>
+            <div class="mono-tags">
+              <span class="mono-tag">WebRTC</span>
+              <span class="mono-tag">CSS Grid</span>
+              <span class="mono-tag">Accessibility AAA</span>
+              <span class="mono-tag">HIPAA UI</span>
+            </div>
+            <ul class="arch-project-bullets">
+              <li>ჩატარებულია <strong>250,000+ წარმატებული ვიდეო-კონსულტაცია</strong> ნულოვანი შეფერხებით.</li>
+              <li>სრული შესაბამისობა <strong>WCAG AAA ხელმისაწვდომობის</strong> სტანდარტებთან ყველა ასაკობრივი ჯგუფისთვის.</li>
+            </ul>
+            <div class="arch-project-footer">
+              <a href="#modal-healthcare" class="arch-project-link">ქეისის ნახვა <span aria-hidden="true">↗</span></a>
+              <span class="arch-project-kind">HealthTech · 2024</span>
+            </div>
+          </article>
+
+          <!-- Project 6: Vortex Protocol -->
+          <article class="arch-project-card" data-group="web3 fintech">
+            <div class="arch-project-top">
+              <div class="arch-project-icon" aria-hidden="true">VX</div>
+              <div class="arch-project-meta">
+                <h3 class="arch-project-title">Vortex Protocol</h3>
+                <p class="arch-project-sub">დეცენტრალიზებული DeFi ლიკვიდურობისა და სმარტ-კონტრაქტების ტერმინალი</p>
+              </div>
+              <span class="arch-project-role">Web3 UI Lead</span>
+            </div>
+            <div class="mono-tags">
+              <span class="mono-tag">Ethers.js</span>
+              <span class="mono-tag">Dark UI System</span>
+              <span class="mono-tag">SVG Charts</span>
+              <span class="mono-tag">Node API</span>
+            </div>
+            <ul class="arch-project-bullets">
+              <li>პლატფორმის ინტერფეისით დამუშავდა <strong>$1.2B+ მოცულობის</strong> ონჩეინ ტრანზაქციები.</li>
+              <li>მრავალსაფეხურიანი სმარტ-კონტრაქტის დადასტურება გამარტივდა ერთ გამჭვირვალე ნაკადამდე.</li>
+            </ul>
+            <div class="arch-project-footer">
+              <a href="#modal-crypto" class="arch-project-link">ქეისის ნახვა <span aria-hidden="true">↗</span></a>
+              <span class="arch-project-kind">Web3 · DeFi</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. EMPLOYEES / TEAM DIRECTORY SECTION (#employees — STRICTLY READ-ONLY GET) -->
+    <section id="employees" class="section-block employees-section">
+      <div class="container">
+        <div class="section-heading-row">
+          <h2 class="section-heading">ჩვენი <span class="text-primary">თანამშრომლები</span></h2>
+          <p class="section-desc">
+            გუნდის წევრებისა და პარტნიორი სპეციალისტების დირექტორია. მონაცემები იტვირთება რეალურ დროში REST API-ის მეშვეობით.
+          </p>
+        </div>
+
+        <div class="employees-toolbar">
+          <div class="employees-count-badge">
+            <span>სულ დირექტორიაში:</span>
+            <strong id="employees-count">0</strong>
+            <span>თანამშრომელი</span>
+          </div>
+          <span class="employees-endpoint-hint">GET https://jsonplaceholder.typicode.com/users</span>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="employees-loading" class="employees-loader" role="status" aria-live="polite">
+          <div class="emerald-spinner" aria-hidden="true"></div>
+          <p class="employees-loader-text">იტვირთება თანამშრომლების მონაცემები...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="employees-error" class="employees-error" hidden>
+          <p style="color: hsl(var(--foreground)); font-weight: 600; margin-bottom: 14px;">
+            მონაცემების ჩატვირთვა ვერ მოხერხდა. გთხოვთ, შეამოწმოთ ინტერნეტ კავშირი.
+          </p>
+          <button type="button" id="employees-retry-btn" class="pill-btn pill-btn-outline">თავიდან ცდა ↻</button>
+        </div>
+
+        <!-- Empty State -->
+        <div id="employees-empty" class="employees-empty" hidden>
+          <p class="text-muted">დირექტორიაში თანამშრომლები არ მოიძებნა.</p>
+        </div>
+
+        <!-- Read-Only Employees Cards Grid -->
+        <div id="employees-grid" class="employees-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- 5. SKILLS & TECHNOLOGIES SECTION (#skills) -->
+    <section id="skills" class="section-block">
+      <div class="container">
+        <div class="section-heading-row">
+          <h2 class="section-heading">უნარები &amp; <span class="text-primary">ტექნოლოგიები</span></h2>
+          <p class="section-desc">
+            ინსტრუმენტების სრული სტეკი, რომელსაც ყოველდღიურად ვიყენებ მასშტაბური ციფრული პროდუქტების შესაქმნელად.
+          </p>
+        </div>
+
+        <div class="skills-arch-grid">
+          <div class="skill-col">
+            <h3 class="skill-col-title">UI/UX &amp; Systems</h3>
+            <ul class="skill-col-list">
+              <li>Figma &amp; Variables</li>
+              <li>Design Systems</li>
+              <li>UX Research</li>
+              <li>Wireframing</li>
+              <li>Prototyping</li>
+              <li>WCAG AAA A11y</li>
+            </ul>
+          </div>
+
+          <div class="skill-col">
+            <h3 class="skill-col-title">ენები</h3>
+            <ul class="skill-col-list">
+              <li>TypeScript</li>
+              <li>JavaScript (ES6+)</li>
+              <li>Semantic HTML5</li>
+              <li>Modern CSS3</li>
+              <li>SVG / Shaders</li>
+              <li>REST &amp; GraphQL</li>
+            </ul>
+          </div>
+
+          <div class="skill-col">
+            <h3 class="skill-col-title">Frontend</h3>
+            <ul class="skill-col-list">
+              <li>React.js</li>
+              <li>Next.js</li>
+              <li>Vue 3</li>
+              <li>State Architecture</li>
+              <li>D3.js Data Viz</li>
+              <li>WebSockets</li>
+            </ul>
+          </div>
+
+          <div class="skill-col">
+            <h3 class="skill-col-title">სტილიზაცია</h3>
+            <ul class="skill-col-list">
+              <li>CSS Grid &amp; Flex</li>
+              <li>Design Tokens</li>
+              <li>Tailwind CSS</li>
+              <li>CSS Modules</li>
+              <li>Fluid Typography</li>
+              <li>Dark UI Systems</li>
+            </ul>
+          </div>
+
+          <div class="skill-col">
+            <h3 class="skill-col-title">Motion &amp; 3D</h3>
+            <ul class="skill-col-list">
+              <li>Micro-interactions</li>
+              <li>WebGL / Three.js</li>
+              <li>Canvas API</li>
+              <li>Scroll Motion</li>
+              <li>60fps Transitions</li>
+              <li>Interactive SVG</li>
+            </ul>
+          </div>
+
+          <div class="skill-col">
+            <h3 class="skill-col-title">ხელსაწყოები</h3>
+            <ul class="skill-col-list">
+              <li>Git &amp; GitHub</li>
+              <li>Storybook</li>
+              <li>Vite &amp; Bundlers</li>
+              <li>Lighthouse 99+</li>
+              <li>Thunder Client</li>
+              <li>CI/CD Pipelines</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CONTACT SECTION (#contact) -->
+    <section id="contact" class="section-block">
+      <div class="container">
+        <div class="section-heading-row">
+          <h2 class="section-heading">როგორ <span class="text-primary">დამიკავშირდეთ</span></h2>
+          <p class="section-desc">
+            გაქვთ ახალი პროდუქტის იდეა, გჭირდებათ დიზაინ-სისტემის არქიტექტურა ან ტექნიკური კონსულტაცია? მომწერეთ პირდაპირ.
+          </p>
+        </div>
+
+        <div class="contact-arch-grid">
+
+          <!-- Left Direct Contact & Elsewhere -->
+          <div class="contact-arch-info">
+            <div class="contact-direct-list">
+              <a href="mailto:nikoloz.design@gmail.com" class="contact-direct-link">
+                <span class="contact-direct-icon" aria-hidden="true">✉</span>
+                <span>nikoloz.design@gmail.com</span>
+              </a>
+              <a href="tel:+995599000000" class="contact-direct-link">
+                <span class="contact-direct-icon" aria-hidden="true">☎</span>
+                <span>+995 599 00 00 00</span>
+              </a>
+              <div class="contact-direct-link">
+                <span class="contact-direct-icon" aria-hidden="true">⌖</span>
+                <span>თბილისი, საქართველო · Remote</span>
+              </div>
+            </div>
+
+            <div class="contact-elsewhere-label">სხვა გვერდები &amp; ქსელები</div>
+            <div class="contact-elsewhere-links">
+              <a href="about.html">ჩემ შესახებ ↗</a>
+              <a href="projects.html">პროექტების კატალოგი ↗</a>
+              <a href="contact.html">დეტალური ბრიფი ↗</a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer">Dribbble</a>
+              <a href="https://behance.net" target="_blank" rel="noopener noreferrer">Behance</a>
+            </div>
+          </div>
+
+          <!-- Right Minimalist Bottom-Border Form -->
+          <form id="arch-contact-form" class="contact-arch-form">
+            <div class="contact-form-row-2">
+              <div class="arch-field">
+                <label for="arch-name" class="arch-label">სახელი</label>
+                <input type="text" id="arch-name" name="name" class="arch-input" placeholder="თქვენი სახელი" required>
+              </div>
+              <div class="arch-field">
+                <label for="arch-email" class="arch-label">ელ-ფოსტა</label>
+                <input type="email" id="arch-email" name="email" class="arch-input" placeholder="you@example.com" required>
+              </div>
+            </div>
+
+            <div class="arch-field">
+              <label for="arch-subject" class="arch-label">თემა</label>
+              <input type="text" id="arch-subject" name="subject" class="arch-input" placeholder="პროექტი, დიზაინ-სისტემა ან კონსულტაცია">
+            </div>
+
+            <div class="arch-field">
+              <label for="arch-message" class="arch-label">შეტყობინება</label>
+              <textarea id="arch-message" name="message" rows="4" class="arch-input" placeholder="მოკლედ მომიყევით თქვენი ამოცანისა და ვადების შესახებ..." required></textarea>
+            </div>
+
+            <button type="submit" class="pill-btn pill-btn-primary">
+              <span>გაგზავნა</span>
+              <span aria-hidden="true">→</span>
+            </button>
+
+            <p id="contact-toast" class="contact-toast" role="status" aria-live="polite"></p>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ==========================================================================
-       SITE FOOTER (<footer>)
+       MINIMAL ARCHITECTURAL FOOTER
        ========================================================================== -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="index.html" class="site-logo">
-            <div class="logo-symbol">DB</div>
-            <div class="logo-text">
-              <span class="logo-name">დავით ბერიძე</span>
-              <span class="logo-sub">Design & Code</span>
-            </div>
-          </a>
-          <p>თანამედროვე ციფრული პროდუქტების დიზაინი და Frontend არქიტექტურა. ხარისხი, რომელიც ქმნის უპირატესობას.</p>
-          <div class="social-links">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">in</a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">gh</a>
-            <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Dribbble">dr</a>
-            <a href="https://behance.net" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Behance">be</a>
+      <div class="footer-arch-bar">
+        <div class="footer-arch-brand">
+          <div class="logo-avatar" style="width: 42px; height: 42px;">
+            <img src="assets/images/profile.png" alt="ნიკოლოზი">
+          </div>
+          <div class="footer-arch-meta">
+            <strong>ნიკოლოზი</strong>
+            <span>Lead UI/UX დიზაინერი &amp; Frontend არქიტექტორი</span>
           </div>
         </div>
 
-        <div class="footer-col">
-          <h4>ნავიგაცია</h4>
-          <ul class="footer-links">
-            <li><a href="index.html">მთავარი</a></li>
-            <li><a href="about.html">ჩემ შესახებ</a></li>
-            <li><a href="projects.html">პროექტები</a></li>
-            <li><a href="contact.html">კონტაქტი</a></li>
-          </ul>
-        </div>
+        <nav class="footer-arch-nav" aria-label="ქვედა ნავიგაცია">
+          <a href="#experience">გამოცდილება</a>
+          <a href="#work">პროექტები</a>
+          <a href="#employees">თანამშრომლები</a>
+          <a href="#skills">ტექნოლოგიები</a>
+          <a href="#contact">კონტაქტი</a>
+          <a href="about.html">ჩემ შესახებ</a>
+        </nav>
 
-        <div class="footer-col">
-          <h4>სერვისები</h4>
-          <ul class="footer-links">
-            <li><a href="projects.html">UI/UX დიზაინი</a></li>
-            <li><a href="projects.html">Frontend დეველოპმენტი</a></li>
-            <li><a href="projects.html">დიზაინ სისტემები</a></li>
-            <li><a href="contact.html">კონსულტაცია & აუდიტი</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>კონტაქტი</h4>
-          <ul class="footer-links">
-            <li style="color: var(--text-secondary);">📍 თბილისი, საქართველო / Remote</li>
-            <li><a href="mailto:david.beridze.design@gmail.com">✉ david.beridze.design@gmail.com</a></li>
-            <li><a href="tel:+995599000000">📞 +995 599 00 00 00</a></li>
-            <li style="color: var(--emerald-light); font-weight: 600; margin-top: 8px;">● ხელმისაწვდომი ახალი შეკვეთებისთვის</li>
-          </ul>
-        </div>
+        <a href="#home" class="back-to-top" aria-label="ზემოთ დაბრუნება">
+          <span>ზემოთ</span>
+          <span class="back-to-top-circle" aria-hidden="true">↑</span>
+        </a>
       </div>
 
-      <div class="footer-bottom">
-        <div>
-          © <span id="current-year">2026</span> დავით ბერიძე. ყველა უფლება დაცულია.
-        </div>
-        <button class="back-to-top" aria-label="ზემოთ დაბრუნება">
-          <span>ზემოთ დაბრუნება</span>
-          <span>↑</span>
-        </button>
-      </div>
+      <p class="footer-copyright">
+        © 2026 ნიკოლოზი · Design &amp; Code Studio. ყველა უფლება დაცულია.
+      </p>
     </div>
   </footer>
 
-  <!-- Project Details Modal Component -->
-  <div class="modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-label="პროექტის დეტალები">
+  <!-- ==========================================================================
+       CASE STUDY MODALS (:target & Escape Key Support)
+       ========================================================================== -->
+
+  <!-- Modal 1: Quantum Analytics -->
+  <div class="modal-overlay" id="modal-fintech" role="dialog" aria-modal="true" aria-label="Quantum Analytics დეტალები">
+    <a href="#work" class="modal-backdrop-close" aria-label="დახურვა"></a>
     <div class="modal-container">
-      <button class="modal-close" aria-label="დახურვა">✕</button>
-      <div id="modal-details-content">
-        <!-- Injected via JavaScript -->
+      <a href="#work" class="modal-close" aria-label="დახურვა">✕</a>
+      <div style="margin-bottom: 22px; padding-right: 36px;">
+        <span class="badge" style="margin-bottom: 12px;">FinTech · 2025</span>
+        <h2 style="font-size: clamp(1.35rem, 4vw, 1.85rem); margin-bottom: 8px;">Quantum Analytics — <span class="text-primary">FinTech პლატფორმა</span></h2>
+        <p class="font-mono" style="color: hsl(var(--primary)); font-size: 0.84rem;">კლიენტი: Apex Global Financials (ლონდონი / ნიუ-იორკი)</p>
+      </div>
+      <p class="text-muted" style="line-height: 1.7; font-size: 0.94rem; margin-bottom: 20px;">
+        ინოვაციური ფინანსური ანალიტიკის პლატფორმა საინვესტიციო ფონდებისა და ტრეიდერებისთვის. სისტემა ამუშავებს მილიონობით ტრანზაქციას რეალურ დროში და წარადგენს მონაცემებს ინტუიციური გრაფიკებით.
+      </p>
+      <div class="mono-tags" style="margin-bottom: 22px;">
+        <span class="mono-tag">React.js</span>
+        <span class="mono-tag">TypeScript</span>
+        <span class="mono-tag">D3.js Data Viz</span>
+        <span class="mono-tag">WebSocket API</span>
+      </div>
+      <ul class="arch-project-bullets" style="margin-bottom: 26px;">
+        <li>მონაცემთა დამუშავებისა და ვიზუალიზაციის სისწრაფე გაიზარდა <strong>40%-ით</strong>.</li>
+        <li>მომხმარებელთა კონვერსია გაუმჯობესდა <strong>65%-ით</strong>.</li>
+        <li>აღიარებულია <strong>Best FinTech Dashboard 2025</strong> ნომინაციით.</li>
+      </ul>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="#contact" class="pill-btn pill-btn-primary">მსგავსი პროექტის დაწყება →</a>
+        <a href="#work" class="pill-btn pill-btn-outline">დახურვა</a>
       </div>
     </div>
   </div>
 
-  <!-- Main JavaScript File -->
+  <!-- Modal 2: Aura Atelier -->
+  <div class="modal-overlay" id="modal-ecommerce" role="dialog" aria-modal="true" aria-label="Aura Atelier დეტალები">
+    <a href="#work" class="modal-backdrop-close" aria-label="დახურვა"></a>
+    <div class="modal-container">
+      <a href="#work" class="modal-close" aria-label="დახურვა">✕</a>
+      <div style="margin-bottom: 22px; padding-right: 36px;">
+        <span class="badge" style="margin-bottom: 12px;">E-Commerce · 2025</span>
+        <h2 style="font-size: clamp(1.35rem, 4vw, 1.85rem); margin-bottom: 8px;">Aura Atelier — <span class="text-primary">ონლაინ ბუტიკი</span></h2>
+        <p class="font-mono" style="color: hsl(var(--primary)); font-size: 0.84rem;">კლიენტი: Aura Luxury Group (მილანი / პარიზი)</p>
+      </div>
+      <p class="text-muted" style="line-height: 1.7; font-size: 0.94rem; margin-bottom: 20px;">
+        მაღალი მოდისა და არქიტექტურული დიზაინის ობიექტების პრემიუმ ელექტრონული მაღაზია უსწრაფესი ჩატვირთვითა და 3D პროდუქტის ხედებით.
+      </p>
+      <div class="mono-tags" style="margin-bottom: 22px;">
+        <span class="mono-tag">Next.js</span>
+        <span class="mono-tag">Headless Shopify</span>
+        <span class="mono-tag">WebGL 3D</span>
+        <span class="mono-tag">Design System</span>
+      </div>
+      <ul class="arch-project-bullets" style="margin-bottom: 26px;">
+        <li>გვერდის ჩატვირთვის დრო <strong>0.6 წამზე ნაკლები</strong> (Lighthouse 99).</li>
+        <li>მობილური გაყიდვების ზრდა <strong>+82%</strong>.</li>
+      </ul>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="#contact" class="pill-btn pill-btn-primary">მსგავსი პროექტის დაწყება →</a>
+        <a href="#work" class="pill-btn pill-btn-outline">დახურვა</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Synthesis AI -->
+  <div class="modal-overlay" id="modal-saas" role="dialog" aria-modal="true" aria-label="Synthesis AI დეტალები">
+    <a href="#work" class="modal-backdrop-close" aria-label="დახურვა"></a>
+    <div class="modal-container">
+      <a href="#work" class="modal-close" aria-label="დახურვა">✕</a>
+      <div style="margin-bottom: 22px; padding-right: 36px;">
+        <span class="badge" style="margin-bottom: 12px;">AI SaaS · 2025</span>
+        <h2 style="font-size: clamp(1.35rem, 4vw, 1.85rem); margin-bottom: 8px;">Synthesis AI — <span class="text-primary">დიზაინ სტუდია</span></h2>
+        <p class="font-mono" style="color: hsl(var(--primary)); font-size: 0.84rem;">კლიენტი: Synthesis Corp (სან-ფრანცისკო)</p>
+      </div>
+      <p class="text-muted" style="line-height: 1.7; font-size: 0.94rem; margin-bottom: 20px;">
+        ხელოვნური ინტელექტის საფუძველზე შექმნილი სამუშაო სივრცე დიზაინერებისა და ინჟინრებისთვის — კომპონენტების გენერაცია და ტოკენების სინქრონიზაცია.
+      </p>
+      <div class="mono-tags" style="margin-bottom: 22px;">
+        <span class="mono-tag">Vue 3</span>
+        <span class="mono-tag">Canvas API</span>
+        <span class="mono-tag">Design Tokens</span>
+        <span class="mono-tag">GraphQL</span>
+      </div>
+      <ul class="arch-project-bullets" style="margin-bottom: 26px;">
+        <li><strong>120,000+</strong> ყოველთვიური აქტიური დეველოპერი და დიზაინერი.</li>
+        <li>UI კომპონენტების მიწოდების დაჩქარება <strong>3.5-ჯერ</strong>.</li>
+      </ul>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="#contact" class="pill-btn pill-btn-primary">მსგავსი პროექტის დაწყება →</a>
+        <a href="#work" class="pill-btn pill-btn-outline">დახურვა</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Horizon Banking -->
+  <div class="modal-overlay" id="modal-banking" role="dialog" aria-modal="true" aria-label="Horizon Banking დეტალები">
+    <a href="#work" class="modal-backdrop-close" aria-label="დახურვა"></a>
+    <div class="modal-container">
+      <a href="#work" class="modal-close" aria-label="დახურვა">✕</a>
+      <div style="margin-bottom: 22px; padding-right: 36px;">
+        <span class="badge" style="margin-bottom: 12px;">Mobile FinTech · 2024</span>
+        <h2 style="font-size: clamp(1.35rem, 4vw, 1.85rem); margin-bottom: 8px;">Horizon Banking — <span class="text-primary">ციფრული ბანკინგი</span></h2>
+        <p class="font-mono" style="color: hsl(var(--primary)); font-size: 0.84rem;">კლიენტი: Horizon Financial Group</p>
+      </div>
+      <p class="text-muted" style="line-height: 1.7; font-size: 0.94rem; margin-bottom: 20px;">
+        მომავლის თაობის მობილური ბანკინგი ბიომეტრიული ავთენტიფიკაციით, მყისიერი P2P გადარიცხვებითა და პერსონალური ანალიტიკით.
+      </p>
+      <div class="mono-tags" style="margin-bottom: 22px;">
+        <span class="mono-tag">React Native</span>
+        <span class="mono-tag">Figma Design System</span>
+        <span class="mono-tag">Biometrics API</span>
+        <span class="mono-tag">WCAG AAA</span>
+      </div>
+      <ul class="arch-project-bullets" style="margin-bottom: 26px;">
+        <li>App Store რეიტინგი <strong>4.9 ★</strong> (45K+ შეფასება).</li>
+        <li>ტრანზაქციების შესრულების დროის შემცირება <strong>50%-ით</strong>.</li>
+      </ul>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="#contact" class="pill-btn pill-btn-primary">მსგავსი პროექტის დაწყება →</a>
+        <a href="#work" class="pill-btn pill-btn-outline">დახურვა</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: BioPulse Health -->
+  <div class="modal-overlay" id="modal-healthcare" role="dialog" aria-modal="true" aria-label="BioPulse Health დეტალები">
+    <a href="#work" class="modal-backdrop-close" aria-label="დახურვა"></a>
+    <div class="modal-container">
+      <a href="#work" class="modal-close" aria-label="დახურვა">✕</a>
+      <div style="margin-bottom: 22px; padding-right: 36px;">
+        <span class="badge" style="margin-bottom: 12px;">HealthTech · 2024</span>
+        <h2 style="font-size: clamp(1.35rem, 4vw, 1.85rem); margin-bottom: 8px;">BioPulse Health — <span class="text-primary">ტელემედიცინა</span></h2>
+        <p class="font-mono" style="color: hsl(var(--primary)); font-size: 0.84rem;">კლიენტი: BioPulse Medical Network</p>
+      </div>
+      <p class="text-muted" style="line-height: 1.7; font-size: 0.94rem; margin-bottom: 20px;">
+        პაციენტებისა და ექიმების ვიდეო-კონსულტაციების, ანალიზების ისტორიისა და ელექტრონული რეცეპტების ერთიანი დაცული ეკოსისტემა.
+      </p>
+      <div class="mono-tags" style="margin-bottom: 22px;">
+        <span class="mono-tag">WebRTC Video</span>
+        <span class="mono-tag">CSS Grid</span>
+        <span class="mono-tag">Encrypted Storage</span>
+        <span class="mono-tag">HIPAA UI</span>
+      </div>
+      <ul class="arch-project-bullets" style="margin-bottom: 26px;">
+        <li><strong>250,000+</strong> წარმატებული დისტანციური კონსულტაცია.</li>
+        <li>100% შესაბამისობა <strong>WCAG AAA</strong> სტანდარტთან.</li>
+      </ul>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="#contact" class="pill-btn pill-btn-primary">მსგავსი პროექტის დაწყება →</a>
+        <a href="#work" class="pill-btn pill-btn-outline">დახურვა</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: Vortex Protocol -->
+  <div class="modal-overlay" id="modal-crypto" role="dialog" aria-modal="true" aria-label="Vortex Protocol დეტალები">
+    <a href="#work" class="modal-backdrop-close" aria-label="დახურვა"></a>
+    <div class="modal-container">
+      <a href="#work" class="modal-close" aria-label="დახურვა">✕</a>
+      <div style="margin-bottom: 22px; padding-right: 36px;">
+        <span class="badge" style="margin-bottom: 12px;">Web3 · DeFi</span>
+        <h2 style="font-size: clamp(1.35rem, 4vw, 1.85rem); margin-bottom: 8px;">Vortex Protocol — <span class="text-primary">Web3 პლატფორმა</span></h2>
+        <p class="font-mono" style="color: hsl(var(--primary)); font-size: 0.84rem;">კლიენტი: Vortex Decentralized Labs</p>
+      </div>
+      <p class="text-muted" style="line-height: 1.7; font-size: 0.94rem; margin-bottom: 20px;">
+        დეცენტრალიზებული ფინანსური ოქმის ვებ-ინტერფეისი, რომელიც რთულ ბლოკჩეინ ტრანზაქციებს აქცევს გამჭვირვალე და უსაფრთხო გამოცდილებად.
+      </p>
+      <div class="mono-tags" style="margin-bottom: 22px;">
+        <span class="mono-tag">Ethers.js</span>
+        <span class="mono-tag">Dark UI System</span>
+        <span class="mono-tag">WebSockets</span>
+        <span class="mono-tag">SVG Charts</span>
+      </div>
+      <ul class="arch-project-bullets" style="margin-bottom: 26px;">
+        <li><strong>$1.2B+</strong> ტრანზაქციების მოცულობა პლატფორმაზე.</li>
+        <li>ნულოვანი შეცდომის მაჩვენებელი სმარტ-კონტრაქტის UX ტესტირებაში.</li>
+      </ul>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="#contact" class="pill-btn pill-btn-primary">მსგავსი პროექტის დაწყება →</a>
+        <a href="#work" class="pill-btn pill-btn-outline">დახურვა</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Architectural Interactive Script -->
   <script src="assets/js/main.js"></script>
 </body>
 </html>
